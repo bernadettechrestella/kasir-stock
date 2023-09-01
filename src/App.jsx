@@ -1,8 +1,11 @@
+import { Link } from "react-router-dom"
 
 function App() {
   return (
-    <div>
-      <h1>Hello World</h1>
+    <div className="text-center">
+      <Link to='/kasir'>
+        <button>Kasir</button>
+      </Link>
     </div>
   )
 }
