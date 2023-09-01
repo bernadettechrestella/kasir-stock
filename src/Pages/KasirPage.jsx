@@ -5,11 +5,14 @@ import CardProduct from '../components/Fragments/CardProduct'
 import Nota from '../components/Fragments/Nota'
 import { getProductCategory, getProducts } from '../services/product.service'
 import SideBar from '../components/Fragments/SideBar'
+import useLogin from '../hooks/useLogin'
 
 const KasirPage = () => {
     const [products, setProducts] = useState({});
     const [category, setCategory] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
+
+    useLogin();
 
     useEffect(() => {
         getProducts((data) => {
