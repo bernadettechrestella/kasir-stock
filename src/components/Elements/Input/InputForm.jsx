@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import Label from './Label';
-import { Input } from 'postcss';
+import Input from './Input';
 
 const InputForm = forwardRef((props, ref) => {
     const {label, name, type, placeholder} = props;
