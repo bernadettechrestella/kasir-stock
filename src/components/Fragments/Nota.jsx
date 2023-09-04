@@ -9,23 +9,13 @@ import { removeFromCart } from '../../redux/slices/cartSlice'
 import Tanggal from '../Elements/Tanggal'
 import Jam from '../Elements/Jam'
 import useTotalPrice from '../../hooks/useTotalPrice'
+import useLogin from '../../hooks/useLogin'
 
 const Nota = (props) => {
   const {products} = props;
   const cart = useSelector((state) => state.cart.data);
-  // const [totalPrice, setTotalPrice] = useState(0);
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   if (products.length > 0 && cart.length >= 0) {
-  //     const sum = cart.reduce((acc, item) => {
-  //       const product = products.find((product) => product.id === item.id);
-  //       return acc + product.price * item.qty;  
-  //     }, 0);
-  //     setTotalPrice(sum);
-  //     localStorage.setItem("cart", JSON.stringify(cart));
-  //   }
-  // }, [cart, products]);
+  const firstName = useLogin();
 
   return (
     <div className='bg-neutral-200 h-screen min-w-[400px]'>
@@ -46,7 +36,7 @@ const Nota = (props) => {
 
               <div className='border-b border-t border-gray-700'>
                 <div className='flex justify-between'>
-                  <h1>Nama Kasir</h1>
+                  <h1>{firstName}</h1>
                   <Jam />
                   <Tanggal />
                 </div>
