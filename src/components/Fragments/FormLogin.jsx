@@ -17,8 +17,8 @@ const FormLogin = () => {
         localStorage.setItem("token", res);
         window.location.href = "/kasir"
       } else {
-        setLoginFailed(res.response.data)
-        console.log(res.response.data);
+        setLoginFailed(res.response.data.message)
+        console.log(res)
       }
     })
   }
@@ -45,7 +45,7 @@ const FormLogin = () => {
             name="password"
         />
         <button className='bg-cyan-800 text-white font-bold rounded w-full h-10' type='submit'>Log In</button>
-        {loginFailed && <div className="text-red-500 font-medium text-center mt-5">{loginFailed}</div>}
+        {loginFailed && <div className="text-red-500 font-medium text-center mt-5">Username/Password Salah</div>}
     </form>
   )
 }
