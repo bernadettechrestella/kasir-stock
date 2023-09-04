@@ -15,7 +15,5 @@ export default function useLogin() {
         setFirstName(getFirstName(token))
     }, []);
 
-    console.log("uselogin")
-
     return firstName;
 }
