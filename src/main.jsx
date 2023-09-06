@@ -8,6 +8,7 @@ import LoginPage from './Pages/LoginPage.jsx'
 import { Provider } from 'react-redux'
 import store from './redux/store.js'
 import CheckoutPage from './Pages/CheckoutPage.jsx'
+import StockPage from './Pages/StockPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: '/checkout',
     element: <CheckoutPage />
+  },
+  {
+    path: '/stock',
+    element: <StockPage />
   }
 ])
 
