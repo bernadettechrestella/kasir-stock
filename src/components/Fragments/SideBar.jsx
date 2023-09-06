@@ -4,6 +4,7 @@ import {GiReceiveMoney} from 'react-icons/gi'
 import {TbFileInvoice} from 'react-icons/tb'
 import {BsFillInboxesFill} from 'react-icons/bs'
 import { NavLink } from 'react-router-dom'
+import {BiLogOut} from 'react-icons/bi'
 
 const SideBar = ({}) => {
     const activeLink = 'rounded-full p-1 flex text-cyan-800 bg-white'
@@ -21,25 +22,30 @@ const SideBar = ({}) => {
       <div className='flex-none'>
         <div className='hidden sm:h-screen sm:w-[70px] sm:bg-cyan-800 sm:block bg-fixed'>
             <div className='flex flex-col items-center pt-4'>
-                    {/* <NavLink to='/user' className={({ isActive }) => isActive ? activeLink: normalLink}>
-                        <CgProfile size={40} className='m-1'/>
+                    <NavLink to='/user' className={({ isActive }) => isActive ? activeLink: normalLink}>
+                        <CgProfile size={30} className='m-1'/>
                     </NavLink>
-                    <p className='text-center pb-2 text-white font-semibold'>User</p> */}
+                    <p className='text-center pb-2 text-white font-semibold text-sm'>User</p>
 
                     <NavLink to='/kasir' className={({ isActive }) => isActive ? activeLink: normalLink}>
-                        <GiReceiveMoney size={40} className='m-1'/>
+                        <GiReceiveMoney size={30} className='m-1'/>
                     </NavLink>
-                    <p className='text-center pb-2 text-white font-semibold'>Kasir</p>
+                    <p className='text-center pb-2 text-white font-semibold text-sm'>Kasir</p>
 
-                    {/* <NavLink to='/invoice' className={({ isActive }) => isActive ? activeLink: normalLink}>
-                        <TbFileInvoice size={40} className='m-1'/>
+                    <NavLink to='/invoice' className={({ isActive }) => isActive ? activeLink: normalLink}>
+                        <TbFileInvoice size={30} className='m-1'/>
                     </NavLink>
-                    <p className='text-center pb-2 text-white font-semibold'>Invoice</p> */}
+                    <p className='text-center pb-2 text-white font-semibold text-sm'>Invoice</p>
 
                     <NavLink to='/stock' className={({ isActive }) => isActive ? activeLink: normalLink}>
-                        <BsFillInboxesFill size={40} className='m-1'/>
+                        <BsFillInboxesFill size={30} className='m-1'/>
                     </NavLink>
-                    <p className='text-center pb-2 text-white font-semibold'>Stock</p>
+                    <p className='text-center pb-2 text-white font-semibold text-sm'>Stock</p>
+
+                    <NavLink to='/' className={({ isActive }) => isActive ? activeLink: normalLink}>
+                        <BiLogOut size={30} className='m-1'/>
+                    </NavLink>
+                    <p className='text-center pb-2 text-white font-semibold text-sm'>Log Out</p>
             </div>
         </div>
     </div>
