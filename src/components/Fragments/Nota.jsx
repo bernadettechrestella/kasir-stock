@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { ImMinus, ImPlus } from 'react-icons/im'
-import { TbDiscount2 } from 'react-icons/tb'
-import { MdOutlineCancel } from 'react-icons/md'
 import { BsFillTrashFill } from 'react-icons/bs'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeFromCart } from '../../redux/slices/cartSlice'
 import Tanggal from '../Elements/Tanggal'
@@ -16,6 +13,20 @@ const Nota = (props) => {
   const cart = useSelector((state) => state.cart.data);
   const dispatch = useDispatch();
   const firstName = useLogin();
+
+  const location = useLocation();
+  const path = location.pathname; //mendapatkan path dari window yang terbuka
+  const isButtonDisabled = path === '/checkout';
+
+  const [stopJam, setStopJam] = useState(false);
+
+  useEffect(() => {
+    if (path === '/checkout') {
+      setStopJam(true)
+    } else {
+      setStopJam(false)
+    }
+  }, [path]);
 
   return (
     <div className='bg-neutral-200 h-screen min-w-[400px]'>
@@ -37,7 +48,7 @@ const Nota = (props) => {
               <div className='border-b border-t border-gray-700'>
                 <div className='flex justify-between'>
                   <h1>{firstName}</h1>
-                  <Jam />
+                  <Jam stop={stopJam}/>
                   <Tanggal />
                 </div>
               </div>
@@ -92,8 +103,10 @@ const Nota = (props) => {
 
             <div className='mt-5 bottom-0'>
               <Link to='/checkout'>
-              <button className='bg-cyan-800 text-white w-full h-[60px] rounded-t-2xl font-semibold text-2xl'>
-              {parseFloat(useTotalPrice(products)*10000).toLocaleString("id-ID", {style: "currency", currency: "IDR", minimumFractionDigits: 0})}
+              <button
+                className='bg-cyan-800 text-white w-full h-[60px] rounded-t-2xl font-semibold text-2xl'
+                disabled={isButtonDisabled}>
+                  {parseFloat(useTotalPrice(products)*10000).toLocaleString("id-ID", {style: "currency", currency: "IDR", minimumFractionDigits: 0})}
               </button>
               </Link>
             </div>
