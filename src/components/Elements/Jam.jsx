@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react";
 
-function Jam() {
+function Jam(props) {
+    const {stop} = props;
     const [time, setTime] = useState(new Date());
 
     useEffect(() => {
-        const interval = setInterval(() => { //interval untuk mengupdate jam setiap 1 detik
-            setTime(new Date()); //mengupdate jam
-        }, 1000); //1000 = 1 detik
+        let interval = null;
 
-        return () => clearInterval(interval); //interval dihapus untuk menghindari memory leak
-    }, []);
+        if (!stop) {
+            interval = setInterval(() => { //interval untuk mengupdate jam setiap 1 detik
+                setTime(new Date()); //mengupdate jam
+            }, 1000); //1000 = 1 detik
+        }
+
+        return () => {
+            clearInterval(interval)
+        }
+    }, [stop]); //mengupdate jika stop
 
     const timeFormat = (date) => {
         let hour = date.getHours();
