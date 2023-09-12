@@ -1,13 +1,14 @@
 import React from 'react'
 import SideBar from '../components/Fragments/SideBar'
 import { useGetProducts } from '../hooks/useProducts'
+import { FaEye, FaPencilAlt } from 'react-icons/fa'
 
 const StockPage = () => {
     const {products, category, filteredProducts, handleCategoryChange} = useGetProducts();
 
   return (
     <>
-    <div className='flex'>
+    <div className='flex font-mono'>
         <SideBar/>
         <div className="flex-1 min-w-0">
             <div className='grid grid-cols-8 gap-4 mx-5 my-5'>
@@ -35,7 +36,8 @@ const StockPage = () => {
                             <th scope="col" className="sticky top-0 px-6 py-4 bg-white">Nama</th>
                             <th scope="col" className="sticky top-0 px-6 py-4 bg-white">Harga Jual</th>
                             <th scope="col" className="sticky top-0 px-6 py-4 bg-white">Stock</th>
-                            <th scope="col" className="sticky top-0 px-6 py-4 bg-white"></th>
+                            <th scope="col" className="sticky top-0 bg-white"></th>
+                            <th scope="col" className="sticky top-0 bg-white"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,14 +45,19 @@ const StockPage = () => {
                             <tr
                             className = {`border-b bg-cyan-800 text-center font-semibold ${index % 2 === 0 ? 'bg-opacity-40' : 'bg-opacity-10'}`}
                             key={product.id}>
-                                <td className="whitespace-nowrap px-6 py-4 font-medium">{product.id}</td>
-                                <td className="whitespace-nowrap px-6 py-4">
+                                <td className="px-6 py-4 font-medium">{product.id}</td>
+                                <td className="px-4 py-4 w-44">
                                     <img src={product.images[0]} className='w-36'/>
                                 </td>
-                                <td className="whitespace-nowrap px-6 py-4">{product.title}</td>
-                                <td className="whitespace-nowrap px-6 py-4">{product.price}</td>
-                                <td className="whitespace-nowrap px-6 py-4">{product.stock}</td>
-                                <td></td>
+                                <td className="px-4 py-4">{product.title}</td>
+                                <td className="px-4 py-4">{product.price}</td>
+                                <td className="px-4 py-4">{product.stock}</td>
+                                <td className=''>
+                                    <FaPencilAlt className='text-red-600'/>
+                                </td>
+                                <td className=''>
+                                    <FaEye className='text-blue-800'/>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
