@@ -11,7 +11,7 @@ const CardProduct = (props) => {
         <img src={image} className='rounded-t-2xl h-[100px] w-full border border-cyan-800'
              onClick={() => dispatch(addToCart({id, qty: 1}))}/>
         <div className='rounded-b-2xl border border-cyan-800 text-center font-semibold'>
-            <h1>{title.substring(0, 15)}</h1>
+            <h1>{title.substring(0, 14)}</h1>
         </div>
     </div>
   )
