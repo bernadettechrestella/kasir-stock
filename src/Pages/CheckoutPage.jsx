@@ -1,41 +1,40 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Nota from '../components/Fragments/Nota'
-import { getProducts } from '../services/product.service';
 import useTotalPrice from '../hooks/useTotalPrice';
 import {BsCheckCircle, BsQuestionCircle} from 'react-icons/bs'
+import { useGetProducts } from '../hooks/useProducts';
 
 const CheckoutPage = () => {
-    const [products, setProducts] = useState({});
+    const { products } = useGetProducts();
     const totalPrice = useTotalPrice(products);
     const [selectedButton, setSelectedButton] = useState(null);
     const [kembalian, setKembalian] = useState(0);
     const [uangTunai, setUangTunai] = useState(0);
     const [showPopup1, setShowPopup1] = useState(false);
-    const [showPopup2, setShowPopup2] = useState(false);
+    const [pembayaran, setPembayaran] = useState(false);
+    const navigate = useNavigate();
 
     let pembulatan = Math.ceil(totalPrice/10) * 10;
 
     const handleBayar1Click = () => {
         setShowPopup1(true);
     }
-    const handleBayar2Click = () => {
-        setShowPopup2(true);
-        setShowPopup1(false);
+    
+    const handleUang = () => {
+        navigate('/printNota', { state: { uangTunai: uangTunai, kembalian: kembalian }});
     }
-
-    useEffect(() => {
-        getProducts((data) => {
-            setProducts(data);
-        });
-    }, [])
 
     const handleButtonClicked = (buttonIndex) => {
         setKembalian(0);
         setSelectedButton(buttonIndex);
+        setUangTunai(totalPrice);
+        console.log(uangTunai)
 
         if (buttonIndex === 1) {
             setKembalian(pembulatan-totalPrice);
+            setUangTunai(pembulatan);
+            console.log(uangTunai)
         }
     }
 
@@ -44,7 +43,7 @@ const CheckoutPage = () => {
         event.target.value = parseInt(value).toLocaleString('id-ID', {style: "currency", currency: "IDR", minimumFractionDigits: 0});
         
         setUangTunai(value);
-        const parsedValue = parseInt(uangTunai);
+        const parsedValue = parseInt(value);
         setKembalian((parsedValue/10000) - totalPrice);
     }
 
@@ -62,14 +61,14 @@ const CheckoutPage = () => {
                         <h1 className='col-span-1 mr-10 font-bold'>Tunai</h1>
                         <button
                             className={`col-span-2 rounded-xl h-[40px] border border-cyan-800 bg-white text-black text-center font-semibold
-                                        ${selectedButton === 0 ? 'bg-cyan-900 text-white' : ''}`}
-                            onClick = {() => handleButtonClicked(0)}>
+                                        ${selectedButton === 0 ? 'bg-cyan-700 text-white' : ''}`}
+                            onClick = {() => {handleButtonClicked(0), setPembayaran(true)}}>
                             {(totalPrice*10000).toLocaleString("id-ID", {style: "currency", currency: "IDR", minimumFractionDigits: 0})}
                         </button>
                         <button
                             className={`col-span-2 rounded-xl h-[40px] border border-cyan-800 bg-white text-black text-center font-semibold
-                            ${selectedButton === 1 ? 'bg-cyan-900 text-white' : ''}`}
-                            onClick = {() => handleButtonClicked(1)}>
+                            ${selectedButton === 1 ? 'bg-cyan-700 text-white' : ''}`}
+                            onClick = {() => {handleButtonClicked(1), setPembayaran(true)}}>
                             {((pembulatan)*10000).toLocaleString("id-ID", {style: "currency", currency: "IDR", minimumFractionDigits: 0})}
                         </button>
                     </div>
@@ -79,12 +78,13 @@ const CheckoutPage = () => {
                             className='col-end-6 col-span-4 h-[40px] rounded-xl border border-cyan-800 text-black font-semibold text-center'
                             onClick = {() => {
                                 setSelectedButton(null);
-                                setKembalian(0)}}
+                                setKembalian(0);
+                                setPembayaran(true)}}
                             onKeyDown = {(event) => {
                                 if (event.key === 'Backspace' || /[0-9]/.test(event.key)) {
                                     handleUangTunaiChange(event)
                                 } else {
-                                    event.preventDefault();
+                                    event.preventDefault(); //untuk menghentikan input
                                 }}}
                             onChange = {handleUangTunaiChange}
                             >
@@ -130,7 +130,8 @@ const CheckoutPage = () => {
                     </Link>
                     <button 
                         className='col-end-6 col-span-1 h-[40px] rounded-xl font-bold text-center items-center bg-cyan-800 text-white'
-                        onClick={handleBayar1Click}>
+                        onClick={handleBayar1Click}
+                        disabled={pembayaran === false}>
                             Bayar
                     </button>
                 </div>
@@ -148,28 +149,11 @@ const CheckoutPage = () => {
                     </div>
                     <div className='flex flex-row justify-around h-10 font-semibold'>
                         <button className='bg-white text-cyan-800 border-cyan-800 border-t w-full rounded-bl-xl' onClick={() => setShowPopup1(false)}>Batal</button>
-                        <button className='bg-cyan-800 text-white w-full rounded-br-lg' onClick={handleBayar2Click}>Bayar</button>
+                        <button className='bg-cyan-800 text-white w-full rounded-br-lg' onClick={handleUang}>Bayar</button>
                     </div>
                 </div>
             </>
-            )}
-        {showPopup2 && (
-            <>
-                <div className='popup-overlay'></div>
-                <div className="popup-card bg-white shadow-xl w-80 h-52 rounded-xl border-2 border-cyan-800 flex flex-col">
-                    <div className='flex-1 text-center'>
-                        <BsCheckCircle size={45} className='text-green-500 w-full my-6'/>
-                        <h1 className='font-bold pb-2'>Pembayaran Berhasil</h1>
-                        <h1 className='font-bold text-red-500'>Kembalian: {(kembalian*10000).toLocaleString("id-ID", {style: "currency", currency: "IDR", minimumFractionDigits: 0})}</h1>
-                    </div>
-                    <div className='flex flex-row justify-around h-10 font-semibold'>
-                        <Link to='/kasir' className='bg-cyan-800 text-white w-full rounded-b-lg text-center pt-2'>
-                            <button>OK</button>
-                        </Link>
-                    </div>
-                </div>
-            </>
-            )}
+        )}
     </div>
   )
 }
