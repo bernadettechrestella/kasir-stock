@@ -9,19 +9,20 @@ import useTotalPrice from '../../hooks/useTotalPrice'
 import useLogin from '../../hooks/useLogin'
 
 const Nota = (props) => {
-  const {products} = props;
+  const {products, uangTunai, kembalian} = props;
   const cart = useSelector((state) => state.cart.data);
   const dispatch = useDispatch();
   const firstName = useLogin();
 
   const location = useLocation();
   const path = location.pathname; //mendapatkan path dari window yang terbuka
-  const isButtonDisabled = path === '/checkout';
+  const isCheckoutPage = path === '/checkout';
+  const isPrintNotaPage = path === '/printNota';
 
   const [stopJam, setStopJam] = useState(false);
 
   useEffect(() => {
-    if (path === '/checkout') {
+    if (path === '/printNota') {
       setStopJam(true)
     } else {
       setStopJam(false)
@@ -60,14 +61,16 @@ const Nota = (props) => {
                 <div className='px-3' key={item.id}>
                   <div className='flex justify-between items-center'>
                     <h1 className='font-semibold'>{product.title.substring(0, 15)}</h1>
-                    <BsFillTrashFill size={15} className='text-red-500'
+                    {isCheckoutPage || !isPrintNotaPage && (
+                      <BsFillTrashFill size={15} className='text-red-500'
                       onClick={() => dispatch(removeFromCart({id: item.id}))}/>
+                      )}
                   </div>
                   <div className='flex pl-3 justify-between'>
                     <h1>{parseFloat(product.price*10000).toLocaleString("id-ID", {style: "currency", currency: "IDR", minimumFractionDigits: 0})}</h1>
                     <div className='flex gap-2'>
                       {/* <ImMinus className='mt-1 text-cyan-800' onClick={() => setCount(count - 1)}/> */}
-                      <h1 className='border border-cyan-800 rounded-md px-2'>{item.qty}</h1>
+                      <h1 className={`${isCheckoutPage || isPrintNotaPage ? 'font-semibold' : 'border border-cyan-800 rounded-md px-2 font-semibold'}`}>{item.qty}</h1>
                       {/* <ImPlus className='mt-1 text-cyan-800' onClick={() => setCount(count + 1)}/> */}
                     </div>
                     <h1>{parseFloat(product.price*item.qty*10000).toLocaleString("id-ID", {style: "currency", currency: "IDR", minimumFractionDigits: 0})}</h1>
@@ -76,39 +79,37 @@ const Nota = (props) => {
               )
             })}
           </div>
-              
-
-          {/* <div className='flex-none'> */}
-            {/* <div className='border-b border-t border-gray-700 mt-2 mb-2 mx-3'>
-                <div className='flex justify-between font-semibold'>
-                  <h1 className='font-bold'>Jumlah</h1>
-                  <h1>Rp 135.000</h1>
-                </div>
-                <div className='flex justify-between font-semibold'>
-                  <h1>Diskon</h1>
-                  <h1>Rp 5.000</h1>
-                </div>
-            </div>
-                <div className='flex justify-between mb-2 mx-4'>
-                  <button className='text-center' data-modal-target="defaultModal" data-modal-toggle="defaultModal">
-                    <TbDiscount2 size={50} className='text-cyan-800'/>
-                    <p className='text-sm'>Diskon</p>
-                  </button>
-
-                  <button className='text-center'>
-                    <MdOutlineCancel size={50} className='text-red-500'/>
-                    <p className='text-sm'>Cancel</p>
-                  </button>
-                </div> */}
 
             <div className='mt-5 bottom-0'>
-              <Link to='/checkout'>
-              <button
-                className='bg-cyan-800 text-white w-full h-[60px] rounded-t-2xl font-semibold text-2xl'
-                disabled={isButtonDisabled}>
-                  {parseFloat(useTotalPrice(products)*10000).toLocaleString("id-ID", {style: "currency", currency: "IDR", minimumFractionDigits: 0})}
-              </button>
-              </Link>
+              {!isPrintNotaPage ? (
+                <Link to='/checkout'>
+                  <button
+                    className='bg-cyan-800 text-white w-full h-[60px] rounded-t-2xl font-semibold text-2xl'
+                    disabled={isCheckoutPage}>
+                      {parseFloat(useTotalPrice(products)*10000).toLocaleString("id-ID", {style: "currency", currency: "IDR", minimumFractionDigits: 0})}
+                  </button>
+                </Link>
+              ) : (
+                <div className='mx-2'>
+                  <div className='flex justify-between border-b border-t border-gray-700 font-bold'>
+                    <h1>Total</h1>
+                    <h1>{parseFloat(useTotalPrice(products)*10000).toLocaleString("id-ID", {style: "currency", currency: "IDR", minimumFractionDigits: 0})}</h1>
+                  </div>
+                  <div>
+                    <div className='flex justify-between'>
+                      <h1>Tunai</h1>
+                      <h1>{(uangTunai*10000).toLocaleString("id-ID", {style: "currency", currency: "IDR", minimumFractionDigits: 0})}</h1>
+                    </div>
+                    <div className='flex justify-between'>
+                      <h1>Kembalian</h1>
+                      <h1>{(kembalian*10000).toLocaleString("id-ID", {style: "currency", currency: "IDR", minimumFractionDigits: 0})}</h1>
+                    </div>
+                    <div className='text-center mb-2 mt-4 text-xs text-gray-700 font-mono'>
+                      <h1>Barang yang sudah dibeli tidak dapat dikembalikan.</h1>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           {/* </div> */}
         </div>
