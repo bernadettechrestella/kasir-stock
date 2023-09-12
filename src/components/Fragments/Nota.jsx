@@ -85,7 +85,7 @@ const Nota = (props) => {
                 <Link to='/checkout'>
                   <button
                     className='bg-cyan-800 text-white w-full h-[60px] rounded-t-2xl font-semibold text-2xl'
-                    disabled={isCheckoutPage}>
+                    disabled={isCheckoutPage || cart.length === 0}>
                       {parseFloat(useTotalPrice(products)*10000).toLocaleString("id-ID", {style: "currency", currency: "IDR", minimumFractionDigits: 0})}
                   </button>
                 </Link>
