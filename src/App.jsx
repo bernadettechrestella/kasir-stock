@@ -7,7 +7,7 @@ import {BsFillInboxesFill} from 'react-icons/bs'
 function App() {
   return (
     <div className='flex justify-center bg-cyan-100 min-h-screen items-center'>
-      <div className="w-full max-w-xs">
+      <div className="w-full max-w-xs flex flex-col">
         <div className="flex text-cyan-800 gap-10">
           <div className="text-center">
             <Link to="/kasir">
@@ -33,6 +33,9 @@ function App() {
               <h1>User</h1>
             </Link>
           </div>
+        </div>
+        <div className="bottom-0 absolute mb-2">
+          <h1 className="text-cyan-800 font-bold font-mono">Made by Bernadette Chrestella</h1>
         </div>
       </div>
     </div>
