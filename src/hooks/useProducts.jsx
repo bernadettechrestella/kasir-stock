@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getProductCategory, getProducts } from "../services/product.service";
 
-export const useGetProducts = (callback) => {
+export const useGetProducts = () => {
     const [products, setProducts] = useState([]);
     const [category, setCategory] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
@@ -21,7 +21,7 @@ export const useGetProducts = (callback) => {
         getProducts((data) => {
             setProducts(data);
             setFilteredProducts(data);
-            callback(data); //callback untuk mengirim data
+            // callback(data); //callback untuk mengirim data
         }),
         getProductCategory((data) => {
             setCategory(data);
