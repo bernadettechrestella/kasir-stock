@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { BiSearchAlt } from 'react-icons/bi'
 import CardProduct from '../components/Fragments/CardProduct'
 import Nota from '../components/Fragments/Nota'
@@ -8,7 +8,8 @@ import { useGetProducts } from '../hooks/useProducts'
 
 const KasirPage = () => {
     const {products, category, filteredProducts, handleCategoryChange} = useGetProducts();
-
+    const [searchText, setSearchText] = useState('');
+    console.log(searchText)
     useLogin();
 
   return (
@@ -33,6 +34,7 @@ const KasirPage = () => {
                                 <div className='rounded-2xl border-2 border-cyan-800 p-2 w-full flex justify-between'>
                                     <form>
                                         <input 
+                                            onChange={(e) => setSearchText(e.target.value)}
                                             type="text"
                                             placeholder='Cari Barang'/>
                                     </form>
@@ -42,7 +44,13 @@ const KasirPage = () => {
 
                             {/* item */}
                             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 grid-flow-row gap-4'>
-                                {products.length > 0 && filteredProducts.map((product) => (
+                                {products.length > 0 && filteredProducts?.filter((product) => {
+                                    if (searchText === '') {
+                                        return product
+                                    } else if (product && product.title && product.title.toLowerCase().includes(searchText.toLowerCase())) {
+                                        return product
+                                    }
+                                }).map((product) => (
                                     <CardProduct
                                         key={product.id}
                                         id={product.id} 
