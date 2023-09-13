@@ -62,7 +62,7 @@ const Nota = (props) => {
                   <div className='flex justify-between items-center'>
                     <h1 className='font-semibold'>{product.title.substring(0, 15)}</h1>
                     {isCheckoutPage || !isPrintNotaPage && (
-                      <BsFillTrashFill size={15} className='text-red-500'
+                      <BsFillTrashFill size={15} className='text-red-500 cursor-pointer'
                       onClick={() => dispatch(removeFromCart({id: item.id}))}/>
                       )}
                   </div>
