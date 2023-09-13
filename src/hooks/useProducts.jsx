@@ -28,5 +28,5 @@ export const useGetProducts = () => {
         })
     }, []);
 
-    return { products, category, filteredProducts, handleCategoryChange };
+    return { products, category, filteredProducts, setFilteredProducts, handleCategoryChange };
 }
