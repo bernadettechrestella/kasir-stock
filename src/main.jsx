@@ -10,6 +10,7 @@ import store from './redux/store.js'
 import CheckoutPage from './Pages/CheckoutPage.jsx'
 import StockPage from './Pages/StockPage.jsx'
 import PrintNotaPage from './Pages/PrintNotaPage.jsx'
+import UserPage from './Pages/UserPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: '/printNota',
     element: <PrintNotaPage />
+  },
+  {
+    path: '/user',
+    element: <UserPage />
   }
 ])
 
