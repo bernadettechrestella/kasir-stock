@@ -16,3 +16,8 @@ export const getFirstName = (token) => {
     const decoded = jwtDecode(token);
     return decoded.firstName
 }
+
+export const getUserID = (token) => {
+    const decoded = jwtDecode(token);
+    return decoded.id
+}
