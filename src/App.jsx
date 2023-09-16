@@ -28,7 +28,7 @@ function App() {
             </Link>
           </div>
           <div className="text-center">
-            <Link to="/">
+            <Link to="/user">
               <CgProfile size={40} className='m-1'/>
               <h1>User</h1>
             </Link>
