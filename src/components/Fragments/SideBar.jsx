@@ -18,6 +18,13 @@ const SideBar = ({}) => {
         setNav(!nav)
     }
 
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('cart');
+        localStorage.removeItem('password');
+        window.location.href = "/";
+    };
+
   return (
       <div className='flex-none'>
         <div className='hidden sm:h-screen sm:w-[70px] sm:bg-cyan-800 sm:block bg-fixed'>
@@ -42,7 +49,7 @@ const SideBar = ({}) => {
                     </NavLink>
                     <p className='text-center pb-2 text-white font-semibold text-sm'>Stock</p>
 
-                    <NavLink to='/' className={({ isActive }) => isActive ? activeLink: normalLink}>
+                    <NavLink to='/' className={({ isActive }) => isActive ? activeLink: normalLink} onClick={handleLogout}>
                         <BiLogOut size={30} className='m-1'/>
                     </NavLink>
                     <p className='text-center pb-2 text-white font-semibold text-sm'>Log Out</p>
