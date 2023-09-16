@@ -9,7 +9,6 @@ import { useGetProducts } from '../hooks/useProducts'
 const KasirPage = () => {
     const {products, category, filteredProducts, handleCategoryChange} = useGetProducts();
     const [searchText, setSearchText] = useState('');
-    console.log(searchText)
     useLogin();
 
   return (
