@@ -12,7 +12,7 @@ const Nota = (props) => {
   const {products, uangTunai, kembalian} = props;
   const cart = useSelector((state) => state.cart.data);
   const dispatch = useDispatch();
-  const firstName = useLogin();
+  const {firstName} = useLogin();
 
   const location = useLocation();
   const path = location.pathname; //mendapatkan path dari window yang terbuka
