@@ -58,14 +58,14 @@ const CheckoutPage = () => {
                     <div className='grid grid-cols-5 gap-2'>
                         <h1 className='col-span-1 mr-10 font-bold'>Tunai</h1>
                         <button
-                            className={`col-span-2 rounded-xl h-[40px] border border-cyan-800 bg-white text-black text-center font-semibold
-                                        ${selectedButton === 0 ? 'bg-blue-900 text-white' : ''}`}
+                            className={`col-span-2 rounded-xl h-[40px] border border-cyan-800 text-center font-semibold
+                                        ${selectedButton === 0 ? 'bg-cyan-800 text-white' : 'bg-white text-black'}`}
                             onClick = {() => {handleButtonClicked(0), setPembayaran(true)}}>
                             {(totalPrice*10000).toLocaleString("id-ID", {style: "currency", currency: "IDR", minimumFractionDigits: 0})}
                         </button>
                         <button
-                            className={`col-span-2 rounded-xl h-[40px] border border-cyan-800 bg-white text-black text-center font-semibold
-                            ${selectedButton === 1 ? 'bg-blue-900 text-white' : ''}`}
+                            className={`col-span-2 rounded-xl h-[40px] border border-cyan-800 text-center font-semibold
+                            ${selectedButton === 1 ? 'bg-cyan-800 text-white' : 'bg-white text-black'}`}
                             onClick = {() => {handleButtonClicked(1), setPembayaran(true)}}>
                             {((pembulatan)*10000).toLocaleString("id-ID", {style: "currency", currency: "IDR", minimumFractionDigits: 0})}
                         </button>
