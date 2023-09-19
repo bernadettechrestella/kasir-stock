@@ -39,10 +39,10 @@ const SideBar = ({}) => {
                     </NavLink>
                     <p className='text-center pb-2 text-white font-semibold text-sm'>Kasir</p>
 
-                    <NavLink to='/invoice' className={({ isActive }) => isActive ? activeLink: normalLink}>
+                    {/* <NavLink to='/invoice' className={({ isActive }) => isActive ? activeLink: normalLink}>
                         <TbFileInvoice size={30} className='m-1'/>
                     </NavLink>
-                    <p className='text-center pb-2 text-white font-semibold text-sm'>Invoice</p>
+                    <p className='text-center pb-2 text-white font-semibold text-sm'>Invoice</p> */}
 
                     <NavLink to='/stock' className={({ isActive }) => isActive ? activeLink: normalLink}>
                         <BsFillInboxesFill size={30} className='m-1'/>
