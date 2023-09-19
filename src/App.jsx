@@ -6,7 +6,7 @@ import {BsFillInboxesFill} from 'react-icons/bs'
 
 function App() {
   return (
-    <div className="flex justify-center items-center min-h-screen bg-[url('/public/images/bg.jpg')] bg-cover">
+    <div className="flex justify-center items-center min-h-screen bg-[url('/images/bg.jpg')] bg-cover">
       <div className="w-full max-w-md bg-white bg-opacity-70 rounded-full">
         <div className="text-cyan-900 font-bold flex justify-around">
           <div className="text-center">
