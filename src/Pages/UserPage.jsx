@@ -47,13 +47,13 @@ const UserPage = () => {
                         <p className='mb-5'>Birth Date</p>
                     </div>
                     <div className='col-start-5 col-span-2'>
-                            <input type="text" className='border border-cyan-800 rounded-lg h-8 mb-3 w-full px-4' value="" disabled/>
-                            <input type="text" className='border border-cyan-800 rounded-lg h-8 mb-3 w-full px-4' value="" disabled/>
-                            <input type="text" className='border border-cyan-800 rounded-lg h-8 mb-3 w-full px-4' value="" disabled/>
-                            <input type="text" className='border border-cyan-800 rounded-lg h-8 mb-3 w-full px-4' value="" disabled/>
-                            <input type="text" className='border border-cyan-800 rounded-lg h-8 mb-3 w-full px-4' value="" disabled/>
-                            <input type="text" className='border border-cyan-800 rounded-lg h-8 mb-3 w-full px-4' value="" disabled/>
-                            <input type="text" className='border border-cyan-800 rounded-lg h-8 mb-3 w-full px-4' value="" disabled/>
+                            <input type="text" className='border border-cyan-800 rounded-lg h-8 mb-3 w-full px-4' value={dataUser.id} disabled/>
+                            <input type="text" className='border border-cyan-800 rounded-lg h-8 mb-3 w-full px-4' value={dataUser.firstName} disabled/>
+                            <input type="text" className='border border-cyan-800 rounded-lg h-8 mb-3 w-full px-4' value={dataUser.lastName} disabled/>
+                            <input type="text" className='border border-cyan-800 rounded-lg h-8 mb-3 w-full px-4' value={dataUser.gender} disabled/>
+                            <input type="text" className='border border-cyan-800 rounded-lg h-8 mb-3 w-full px-4' value={dataUser.email} disabled/>
+                            <input type="text" className='border border-cyan-800 rounded-lg h-8 mb-3 w-full px-4' value={dataUser.phone} disabled/>
+                            <input type="text" className='border border-cyan-800 rounded-lg h-8 mb-3 w-full px-4' value={dataUser.birthDate} disabled/>
                     </div>
                 </div>
                 </div>
