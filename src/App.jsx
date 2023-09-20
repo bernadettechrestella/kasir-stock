@@ -11,7 +11,7 @@ function App() {
         <div className="text-cyan-900 font-bold flex justify-around">
           <div className="text-center">
             <p>Use any Account from</p>
-            <a href="https://dummyjson.com/docs/users" className="text-blue-700">https://dummyjson.com/docs/users</a>
+            <a href="https://dummyjson.com/docs/users" className="text-blue-700" target="_blank" rel="noreferrer">https://dummyjson.com/docs/users</a>
             <p>for Login</p>
           </div>
           <div className="text-center animate-bounce">
