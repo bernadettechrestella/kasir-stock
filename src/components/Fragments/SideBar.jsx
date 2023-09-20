@@ -29,10 +29,10 @@ const SideBar = ({}) => {
       <div className='flex-none'>
         <div className='hidden sm:h-screen sm:w-[70px] sm:bg-cyan-800 sm:block bg-fixed'>
             <div className='flex flex-col items-center pt-4'>
-                    <NavLink to='/user' className={({ isActive }) => isActive ? activeLink: normalLink}>
+                    {/* <NavLink to='/user' className={({ isActive }) => isActive ? activeLink: normalLink}>
                         <CgProfile size={30} className='m-1'/>
                     </NavLink>
-                    <p className='text-center pb-2 text-white font-semibold text-sm'>User</p>
+                    <p className='text-center pb-2 text-white font-semibold text-sm'>User</p> */}
 
                     <NavLink to='/kasir' className={({ isActive }) => isActive ? activeLink: normalLink}>
                         <GiReceiveMoney size={30} className='m-1'/>
