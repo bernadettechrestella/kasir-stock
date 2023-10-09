@@ -11,6 +11,7 @@ import CheckoutPage from './Pages/CheckoutPage.jsx'
 import StockPage from './Pages/StockPage.jsx'
 import PrintNotaPage from './Pages/PrintNotaPage.jsx'
 import UserPage from './Pages/UserPage.jsx'
+import CartPageMobile from './Pages/CartPageMobile.jsx'
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: '/user',
     element: <UserPage />
+  },
+  {
+    path: '/cart',
+    element: <CartPageMobile />
   }
 ])
 
